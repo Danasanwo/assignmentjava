@@ -23,9 +23,10 @@ public class Parser {
         // split instruction into several part
         String[] instructionParts = getInstruction().split(" ");
         String firstPart = instructionParts[0];
+
         String secondPart = instructionParts[1];
-        String thirdPart = instructionParts[2];
-        String fourthPart = instructionParts[3];
+        String thirdPart = "";
+        String fourthPart = "";
 
         // if the instruction has more than 4 characters, it is invalid
         if (instructionParts.length > 4) {
@@ -36,17 +37,69 @@ public class Parser {
         // if the instruction matches any of the preset instruction set
         if (Arrays.stream(instructionSet).anyMatch(firstPart::equals)) {
             System.out.println("proceed");
-
+            setParsedInstruction(firstPart, secondPart, thirdPart, fourthPart);
         } else {
-            System.out.println("koshidanu");
+            System.out.println("incorrect");
             return;
         }
 
-        // }
+        if (firstPart.equals("rectangle")) {
+            System.out.println("rectangle");
+            thirdPart = instructionParts[2];
+            Rectangle rectangle = new Rectangle();
+            rectangle.width = Integer.parseInt(instructionParts[1]);
+            rectangle.height = Integer.parseInt(instructionParts[2]);
+        }
+
+        if (firstPart.equals("circle")) {
+            System.out.println("circle");
+            Circle circle = new Circle();
+            // circle.radius = Integer.parseInt(instructionParts[1]);
+            circle.setRadius(Integer.parseInt(instructionParts[1]));
+        }
+
+        if (firstPart.equals("triangle")) {
+            System.out.println("triangle");
+        }
+
+        if (firstPart.equals("square")) {
+            System.out.println("square");
+            thirdPart = instructionParts[1];
+            Rectangle rectangle = new Rectangle();
+            rectangle.width = Integer.parseInt(instructionParts[1]);
+            rectangle.height = Integer.parseInt(instructionParts[1]);
+        }
+
+        if (firstPart.equals("moveto")) {
+            System.out.println("Move to");
+            thirdPart = instructionParts[2];
+            Shape shape = new Shape();
+            shape.positionX = Integer.parseInt(instructionParts[1]);
+            shape.positionY = Integer.parseInt(instructionParts[2]);
+        }
+
+        if (firstPart.equals("drawto")) {
+            System.out.println("Draw to");
+            DrawTo drawTo = new DrawTo();
+            thirdPart = instructionParts[1];
+            drawTo.newPositionX = Integer.parseInt(instructionParts[1]);
+            drawTo.newPositionY = Integer.parseInt(instructionParts[2]);
+        }
 
     }
 
-    Parser() {
+    String[] parsedInstruction = { "", "", "", "" };
+
+    public void setParsedInstruction(String firstPart, String secondPart, String thirdPart, String fourthPart) {
+        this.parsedInstruction[0] = firstPart;
+        this.parsedInstruction[1] = secondPart;
+        this.parsedInstruction[2] = thirdPart;
+        this.parsedInstruction[3] = fourthPart;
 
     }
+
+    public String[] getParsedInstruction() {
+        return parsedInstruction;
+    }
+
 }
