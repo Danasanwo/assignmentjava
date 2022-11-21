@@ -50,7 +50,6 @@ public class Parser {
         }
 
         if (firstPart.equals("rectangle")) {
-            System.out.println("rectangle");
             thirdPart = instructionParts[2];
             Rectangle rectangle = new Rectangle();
             rectangle.width = Integer.parseInt(instructionParts[1]);
@@ -69,7 +68,7 @@ public class Parser {
         }
 
         if (firstPart.equals("square")) {
-            System.out.println("square");
+
             thirdPart = instructionParts[1];
             Rectangle rectangle = new Rectangle();
             rectangle.width = Integer.parseInt(instructionParts[1]);
