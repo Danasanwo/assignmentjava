@@ -17,6 +17,7 @@ public class Form extends JFrame implements ActionListener {
 
     JTextField singleCommand;
     JTextArea multipleCommand;
+    JTextArea errorCommand;
     JButton runButton;
     JButton clearButton;
     JButton resetButton;
@@ -60,6 +61,12 @@ public class Form extends JFrame implements ActionListener {
         commandPanel.setBounds(0, 0, 500, 500);
         canva = new DrawCanvas();
 
+        // Error PANEL
+
+        JPanel errorPanel = new JPanel();
+        errorPanel.setBackground(Color.gray);
+        errorPanel.setBounds(0, 500, 1000, 300);
+
         // create textfields
         singleCommand = new JTextField();
         singleCommand.setPreferredSize(new Dimension(400, 40));
@@ -69,6 +76,10 @@ public class Form extends JFrame implements ActionListener {
         multipleCommand.setPreferredSize(new Dimension(400, 240));
         multipleCommand.setBorder(new LineBorder(Color.GRAY, 2));
 
+        errorCommand = new JTextArea();
+        errorCommand.setPreferredSize(new Dimension(800, 200));
+        errorCommand.setBorder(new LineBorder(Color.white, 5));
+
         // create buttons
         runButton = new JButton("Run");
         runButton.setPreferredSize(new Dimension(400, 40));
@@ -76,9 +87,11 @@ public class Form extends JFrame implements ActionListener {
 
         clearButton = new JButton("Clear");
         clearButton.setPreferredSize(new Dimension(400, 40));
+        clearButton.addActionListener(this);
 
         resetButton = new JButton("Reset");
         resetButton.setPreferredSize(new Dimension(400, 40));
+        resetButton.addActionListener(this);
 
         saveButton = new JButton("Save");
         saveButton.setPreferredSize(new Dimension(400, 40));
@@ -93,45 +106,81 @@ public class Form extends JFrame implements ActionListener {
 
         this.add(commandPanel);
         this.add(canva);
+        this.add(errorPanel);
         commandPanel.add(singleCommand);
         commandPanel.add(multipleCommand);
         commandPanel.add(runButton);
         commandPanel.add(clearButton);
         commandPanel.add(resetButton);
         commandPanel.add(saveButton);
+        errorPanel.add(errorCommand);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        Parser parse = new Parser();
         if (e.getSource() == runButton) {
-            Parser parse = new Parser();
-            parse.setInstruction((singleCommand.getText()));
-            parse.parseInstruction();
 
-            String[][] parsedInstructionsArray = { { "", "", "", "" } };
-            int n = parsedInstructionsArray.length;
-            String[][] newparsedInstructionsArray = new String[n + 1][];
-            for (int i = 0; i < n; i++) {
-                newparsedInstructionsArray[i] = parsedInstructionsArray[i];
+            if (singleCommand.getText().length() > 0) {
+
+                // SingleCommands
+                try {
+                    parse.setInstruction((singleCommand.getText()));
+                    parse.parseInstruction();
+
+                    String[][] parsedInstructionsArray = { { "", "", "", "" } };
+                    int n = parsedInstructionsArray.length;
+                    String[][] newparsedInstructionsArray = new String[n + 1][];
+                    for (int i = 0; i < n; i++) {
+                        newparsedInstructionsArray[i] = parsedInstructionsArray[i];
+                    }
+
+                    newparsedInstructionsArray[n] = parse.getParsedInstruction();
+
+                    canva.setGraphicsInstruction(newparsedInstructionsArray);
+
+                    canva.repaint();
+                } catch (Exception a) {
+                    System.out.println(a.getMessage());
+                }
+
             }
 
-            newparsedInstructionsArray[n] = parse.getParsedInstruction();
+            // MULTIPLE COMMANDS
+            if (multipleCommand.getText().length() > 0) {
+                try {
+                    parse.setMultipleInstruction(multipleCommand.getText());
+                    parse.createMultipleParsedInstruction();
+                    canva.setGraphicsInstruction(parse.getRefinedParsedArray());
 
-            System.out.println(newparsedInstructionsArray[1][0] + 1);
+                    canva.repaint();
 
-            System.out.println(newparsedInstructionsArray.length);
-
-            // canva.setGraphicsInstruction(parse.getParsedInstruction()[0]);
-
-            // canva.repaint();
+                } catch (Exception d) {
+                    System.out.println(d.getMessage());
+                }
+            }
 
         }
 
         if (e.getSource() == saveButton) {
-            System.out.println(multipleCommand.getText());
             createFile(multipleCommand.getText());
+        }
+
+        if (e.getSource() == resetButton) {
+
+            String[][] newArr = { { "", "", "", "" } };
+            canva.setGraphicsInstruction(newArr);
+            canva.repaint();
+
+        }
+
+        if (e.getSource() == clearButton) {
+
+            String[][] newArr = { { "", "", "", "" } };
+            canva.setGraphicsInstruction(newArr);
+            canva.repaint();
+
         }
 
     }

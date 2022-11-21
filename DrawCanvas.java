@@ -3,32 +3,71 @@ import javax.swing.JPanel;
 
 public class DrawCanvas extends JPanel {
 
-    // public Integer posX = 0;
-    // public Integer posY = 0;
+    public Integer posX = 0;
+    public Integer posY = 0;
+    public String shapeColour = "#000000";
+    public Boolean fillOn = false;
 
-    // public Integer getPosX() {
-    // return posX;
-    // }
+    public void setColour(String colour) {
+        if (colour.equals("black")) {
+            this.shapeColour = "#000000";
+        }
+        if (colour.equals("blue")) {
+            this.shapeColour = "#0000FF";
+        }
+        if (colour.equals("red")) {
+            this.shapeColour = "#FF0000";
+        }
+        if (colour.equals("green")) {
+            this.shapeColour = "#00FF00";
+        }
+        if (colour.equals("YELLO")) {
+            this.shapeColour = "#FFFF00";
+        }
 
-    // public void setPosX(Integer posX) {
-    // this.posX = posX;
-    // }
+    }
 
-    // public Integer getPosY() {
-    // return posY;
-    // }
+    public String getColour() {
 
-    // public void setPosY(Integer posY) {
-    // this.posY = posY;
-    // }
+        return shapeColour;
+    }
 
-    public String GraphicsInstruction = "";
+    public Boolean getFillOn() {
+        return fillOn;
+    }
 
-    public void setGraphicsInstruction(String instruction) {
+    public void setFillOn(String fillOn) {
+        if (fillOn.equals("on")) {
+            this.fillOn = true;
+        }
+        if (fillOn.equals("off")) {
+            this.fillOn = false;
+        }
+    }
+
+    public Integer getPosX() {
+        return posX;
+    }
+
+    public void setPosX(Integer posX) {
+        this.posX = posX;
+    }
+
+    public Integer getPosY() {
+        return posY;
+    }
+
+    public void setPosY(Integer posY) {
+        this.posY = posY;
+    }
+
+    public String[][] GraphicsInstruction = { { "", "", "", "" } };
+
+    public void setGraphicsInstruction(String[][] instruction) {
         this.GraphicsInstruction = instruction;
     }
 
-    public String getGraphicsInstruction() {
+    public String[][] getGraphicsInstruction() {
         return GraphicsInstruction;
     }
 
@@ -40,50 +79,98 @@ public class DrawCanvas extends JPanel {
 
     public void paint(Graphics g) {
         Graphics2D graphicsDrawer = (Graphics2D) g;
-        graphicsDrawer.setBackground(Color.BLUE);
+        graphicsDrawer.setPaint(Color.decode(getColour()));
+        graphicsDrawer.setStroke(new BasicStroke(3));
 
-        if (getGraphicsInstruction().equals("")) {
-            graphicsDrawer.drawRect(0, 0, 2, 2);
+        for (var each : getGraphicsInstruction()) {
+
+            // move to
+            if (each[0].equals("moveto")) {
+                setPosX(Integer.parseInt(each[1]));
+                setPosY(Integer.parseInt(each[2]));
+            }
+
+            // draw to
+
+            if (each[0].equals("drawto")) {
+                graphicsDrawer.drawLine(getPosX(), getPosY(), Integer.parseInt(each[1]),
+                        Integer.parseInt(each[2]));
+            }
+
+            // cursor
+            if (each[0].equals("")) {
+                graphicsDrawer.fillRect(0, 0, 2, 2);
+            }
+
+            // pen colour
+
+            if (each[0].equals("pen")) {
+                setColour(each[1]);
+            }
+
+            // fill shape
+            if (each[0].equals("fill")) {
+                setFillOn(each[1]);
+            }
+
+            if (fillOn) {
+
+                // rectangle
+                if (each[0].equals("rectangle")) {
+                    graphicsDrawer.fillRect(getPosX(), getPosY(), Integer.parseInt(each[1]),
+                            Integer.parseInt(each[2]));
+
+                }
+
+                // circle
+                if (each[0].equals("circle")) {
+
+                    graphicsDrawer.fillOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+
+                }
+
+                // square
+
+                if (each[0].equals("square")) {
+                    graphicsDrawer.fillRect(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+                }
+
+                // Triangle
+
+                if (each[0].equals("triangle")) {
+                    graphicsDrawer.fillPolygon(null);
+                    ;
+                }
+
+            }
+
+            if (!fillOn) {
+
+                // rectangle
+                if (each[0].equals("rectangle")) {
+                    graphicsDrawer.drawRect(getPosX(), getPosY(), Integer.parseInt(each[1]),
+                            Integer.parseInt(each[2]));
+                    ;
+                }
+
+                // circle
+                if (each[0].equals("circle")) {
+                    graphicsDrawer.drawOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+
+                }
+
+                // square
+                if (each[0].equals("square")) {
+                    graphicsDrawer.drawRect(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+                }
+
+                // Triangle
+                if (each[0].equals("triangle")) {
+                    graphicsDrawer.drawRect(0, 0, 100, 50);
+                }
+
+            }
         }
-
-        if (getGraphicsInstruction().equals("moveto")) {
-            graphicsDrawer.drawRect(100, 100, 2, 2);
-        }
-        if (getGraphicsInstruction().equals("rectangle")) {
-            graphicsDrawer.drawRect(0, 0, 100, 50);
-        }
-
-        if (getGraphicsInstruction().equals("circle")) {
-
-            graphicsDrawer.drawOval(0, 0, 50, 50);
-            ;
-        }
-
-        if (getGraphicsInstruction().equals("square")) {
-            graphicsDrawer.drawRect(0, 0, 100, 100);
-        }
-
-        if (getGraphicsInstruction().equals("triangle")) {
-            graphicsDrawer.drawPolygon(null);
-            ;
-        }
-
-        if (getGraphicsInstruction().equals("triangle")) {
-            graphicsDrawer.drawRect(0, 0, 100, 50);
-        }
-
-        if (getGraphicsInstruction().equals("rectangle")) {
-            graphicsDrawer.drawRect(0, 0, 100, 50);
-        }
-
-        if (getGraphicsInstruction().equals("drawto")) {
-            graphicsDrawer.drawLine(10, 10, 200, 200);
-        }
-
-        // graphicsDrawer.setPaint(Color.blue);
-        // graphicsDrawer.setStroke(new BasicStroke(2));
-        // graphicsDrawer.setPaint(Color.green);
-        // graphicsDrawer.drawLine(10, 10, 200, 200);
 
     }
 

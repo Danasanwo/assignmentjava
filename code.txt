@@ -1,4 +1,3 @@
-GAWU
-HJJJ
-HJJJ
-HHHH
+circle 30
+rectangle 80 70
+moveto 70 80
