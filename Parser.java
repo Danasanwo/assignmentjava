@@ -6,7 +6,8 @@ public class Parser {
 
     // list of possible instructions
     public String[] instructionSet = { "clear", "moveto", "reset", "pen", "line", "draw", "circle", "triangle",
-            "rectangle", "fill", "square", "drawto" };
+            "rectangle", "fill", "square", "drawto", "tri",
+        "oval" };
 
     // set instruction
     public void setInstruction(String command) {
@@ -65,6 +66,48 @@ public class Parser {
 
         if (firstPart.equals("triangle")) {
             System.out.println("triangle");
+            thirdPart = instructionParts[2];
+
+        }
+
+
+        if (firstPart.equals("pentagon")) {
+            System.out.println("pentagon");
+
+
+        }
+
+
+        if (firstPart.equals("hexagon")) {
+            System.out.println("hexagon");
+
+
+        }
+
+        if (firstPart.equals("septagon")) {
+            System.out.println("septagon");
+
+
+        }
+
+
+        if (firstPart.equals("octagon")) {
+            System.out.println("octagon");
+
+
+        }
+
+
+        if (firstPart.equals("nonagon")) {
+            System.out.println("nonagon");
+
+
+        }
+
+        if (firstPart.equals("decagon")) {
+            System.out.println("decagon");
+
+
         }
 
         if (firstPart.equals("square")) {

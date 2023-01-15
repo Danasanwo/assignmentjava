@@ -138,8 +138,50 @@ public class DrawCanvas extends JPanel {
                 // Triangle
 
                 if (each[0].equals("triangle")) {
-                    graphicsDrawer.fillPolygon(null);
-                    ;
+
+                    // x coordinates of vertices
+                    int x[] = { (getPosX() +  (Integer.parseInt(each[1])/ 2)), getPosX() , getPosX() + Integer.parseInt(each[1]) };
+    
+                    // y coordinates of vertices
+                    int y[] = { getPosY(), (getPosY() + Integer.parseInt(each[2])), (getPosY() + Integer.parseInt(each[2]))};
+
+                    // draw the polygon using drawPolygon function
+                    graphicsDrawer.fillPolygon(x, y, 3);
+                    
+                }
+
+                // pentagon
+                if (each[0].equals("pentagon")) {
+
+                    // x coordinates of vertices
+                    int x[] = { (getPosX() +  (Integer.parseInt(each[1]) * 309 / 1000)), (getPosX() + (Integer.parseInt(each[1]) * 309 / 1000) + (Integer.parseInt(each[1]))) ,
+                        (getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))), ((getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))) / 2),
+                        getPosX()};
+            
+                    // y coordinates of vertices
+                    int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 951/1000)),
+                        (getPosY() + (Integer.parseInt(each[1]) * 951/1000) + (Integer.parseInt(each[1]) * 588/1000)), 
+                        (getPosY() + (Integer.parseInt(each[1]) * 951/1000))};
+
+                    // draw the polygon using drawPolygon function
+                    graphicsDrawer.fillPolygon(x, y, 5);
+                }
+
+                // hexagon
+                if (each[0].equals("hexagon")) {
+
+                    // x coordinates of vertices
+                    int x[] = { (getPosX() +  (Integer.parseInt(each[1]) / 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))) ,
+                            (getPosX() +  (Integer.parseInt(each[1]) * 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))),
+                            (getPosX() +  (Integer.parseInt(each[1]) / 2)), getPosX()};
+            
+                    // y coordinates of vertices
+                    int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 866/1000)),
+                        (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)), (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)),
+                        (getPosY() + (Integer.parseInt(each[1]) * 866/1000))};
+
+                    // draw the polygon using drawPolygon function
+                    graphicsDrawer.fillPolygon(x, y, 6);
                 }
 
             }
@@ -166,8 +208,52 @@ public class DrawCanvas extends JPanel {
 
                 // Triangle
                 if (each[0].equals("triangle")) {
-                    graphicsDrawer.drawRect(0, 0, 100, 50);
+
+                    // x coordinates of vertices
+                    int x[] = { (getPosX() +  (Integer.parseInt(each[1])/ 2)), getPosX() , getPosX() + Integer.parseInt(each[1]) };
+            
+                    // y coordinates of vertices
+                    int y[] = { getPosY(), (getPosY() + Integer.parseInt(each[2])), (getPosY() + Integer.parseInt(each[2]))};
+
+                    // draw the polygon using drawPolygon function
+                    graphicsDrawer.drawPolygon(x, y, 3);
                 }
+
+                // pentagon
+                if (each[0].equals("pentagon")) {
+
+                    // x coordinates of vertices
+                    int x[] = { (getPosX() +  (Integer.parseInt(each[1]) * 309 / 1000)), (getPosX() + (Integer.parseInt(each[1]) * 309 / 1000) + (Integer.parseInt(each[1]))) ,
+                         (getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))), ((getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))) / 2),
+                         getPosX()};
+            
+                    // y coordinates of vertices
+                    int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 951/1000)),
+                        (getPosY() + (Integer.parseInt(each[1]) * 951/1000) + (Integer.parseInt(each[1]) * 588/1000)), 
+                        (getPosY() + (Integer.parseInt(each[1]) * 951/1000))};
+
+                    // draw the polygon using drawPolygon function
+                    graphicsDrawer.drawPolygon(x, y, 5);
+                }
+
+                // hexagon
+                if (each[0].equals("hexagon")) {
+
+                    // x coordinates of vertices
+                    int x[] = { (getPosX() +  (Integer.parseInt(each[1]) / 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))) ,
+                            (getPosX() +  (Integer.parseInt(each[1]) * 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))),
+                            (getPosX() +  (Integer.parseInt(each[1]) / 2)), getPosX()};
+            
+                    // y coordinates of vertices
+                    int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 866/1000)),
+                        (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)), (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)),
+                        (getPosY() + (Integer.parseInt(each[1]) * 866/1000))};
+
+                    // draw the polygon using drawPolygon function
+                    graphicsDrawer.drawPolygon(x, y, 6);
+                }
+
+                //oval
 
             }
         }
