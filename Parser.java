@@ -6,7 +6,7 @@ public class Parser {
 
     // list of possible instructions
     public String[] instructionSet = { "clear", "moveto", "reset", "pen", "line", "draw", "circle", "triangle",
-            "rectangle", "fill", "square", "drawto", "tri",
+            "rectangle", "fill", "square", "drawto", "pentagon", "hexagon", "septagon", "octagon", "nonagon", "decagon", 
         "oval" };
 
     // set instruction
