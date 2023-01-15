@@ -58,14 +58,14 @@ public class Form extends JFrame implements ActionListener {
         // create panels for command and canvas
         JPanel commandPanel = new JPanel();
         commandPanel.setBackground(Color.white);
-        commandPanel.setBounds(0, 0, 500, 500);
+        commandPanel.setBounds(0, 0, 500, 800);
         canva = new DrawCanvas();
 
-        // Error PANEL
+        // // Error PANEL
 
-        JPanel errorPanel = new JPanel();
-        errorPanel.setBackground(Color.gray);
-        errorPanel.setBounds(0, 500, 1000, 300);
+        // JPanel errorPanel = new JPanel();
+        // errorPanel.setBackground(Color.gray);
+        // errorPanel.setBounds(500, 500, 500, 300);
 
         // create textfields
         singleCommand = new JTextField();
@@ -73,7 +73,7 @@ public class Form extends JFrame implements ActionListener {
         singleCommand.setBorder(new LineBorder(Color.GRAY, 2));
 
         multipleCommand = new JTextArea();
-        multipleCommand.setPreferredSize(new Dimension(400, 240));
+        multipleCommand.setPreferredSize(new Dimension(400, 450));
         multipleCommand.setBorder(new LineBorder(Color.GRAY, 2));
 
         errorCommand = new JTextArea();
@@ -106,14 +106,14 @@ public class Form extends JFrame implements ActionListener {
 
         this.add(commandPanel);
         this.add(canva);
-        this.add(errorPanel);
+        // this.add(errorPanel);
         commandPanel.add(singleCommand);
         commandPanel.add(multipleCommand);
         commandPanel.add(runButton);
-        commandPanel.add(clearButton);
-        commandPanel.add(resetButton);
+        // commandPanel.add(clearButton);
+        // commandPanel.add(resetButton);
         commandPanel.add(saveButton);
-        errorPanel.add(errorCommand);
+        // errorPanel.add(errorCommand);
 
     }
 
@@ -167,13 +167,13 @@ public class Form extends JFrame implements ActionListener {
             createFile(multipleCommand.getText());
         }
 
-        if (e.getSource() == resetButton) {
+        // if (e.getSource() == resetButton) {
 
-            String[][] newArr = { { "", "", "", "" } };
-            canva.setGraphicsInstruction(newArr);
-            canva.repaint();
+        //     String[][] newArr = { { "", "", "", "" } };
+        //     canva.setGraphicsInstruction(newArr);
+        //     canva.repaint();
 
-        }
+        // }
 
         if (e.getSource() == clearButton) {
 

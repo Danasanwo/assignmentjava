@@ -1,11 +1,13 @@
+
 import java.util.Arrays;
+
 
 public class Parser {
     public String instruction;
     public String[] multipleInstruction;
 
     // list of possible instructions
-    public String[] instructionSet = { "clear", "moveto", "reset", "pen", "line", "draw", "circle", "triangle",
+    public String[] instructionSet = { "clear", "moveto", "reset", "clear", "pen", "line", "draw", "circle", "triangle",
             "rectangle", "fill", "square", "drawto", "pentagon", "hexagon", "septagon", "octagon", "nonagon", "decagon", 
         "oval" };
 
@@ -46,8 +48,22 @@ public class Parser {
             System.out.println("proceed");
             setParsedInstruction(firstPart, secondPart, thirdPart, fourthPart);
         } else {
-            System.out.println("incorrect");
-            return;
+
+            if (secondPart.equals("=")) {
+                System.out.println(secondPart);
+                thirdPart = instructionParts[2];
+            } else {
+                System.out.println("incorrect");
+                thirdPart = "incorrect";
+            }
+        }
+
+        if (firstPart.equals("reset")) {
+            System.out.println("reset");
+        }
+
+        if (firstPart.equals("clear")) {
+            System.out.println("clear");
         }
 
         if (firstPart.equals("rectangle")) {
@@ -67,14 +83,11 @@ public class Parser {
         if (firstPart.equals("triangle")) {
             System.out.println("triangle");
             thirdPart = instructionParts[2];
-
         }
 
 
         if (firstPart.equals("pentagon")) {
             System.out.println("pentagon");
-
-
         }
 
 
@@ -192,8 +205,13 @@ public class Parser {
             if (Arrays.stream(instructionSet).anyMatch(firstPart::equals)) {
                 // System.out.println("proceed");
             } else {
-                System.out.println("incorrect");
-                return;
+                if (secondPart.equals("=")) {
+                    System.out.println(secondPart);
+                    thirdPart = instructionParts[2];
+                } else {
+                    System.out.println("incorrect");
+                    thirdPart = "incorrect";
+                }
             }
 
             if (firstPart.equals("rectangle")) {
@@ -218,6 +236,26 @@ public class Parser {
 
             }
 
+            if (firstPart.equals("triangle")) {
+                System.out.println("triangle");
+                thirdPart = instructionParts[2];
+            }
+
+
+            if (firstPart.equals("pentagon")) {
+                System.out.println("pentagon");
+
+            }
+
+            if (firstPart.equals("hexagon")) {
+                System.out.println("hexagon");
+
+            }
+            if (firstPart.equals("oval")) {
+                System.out.println("oval");
+                thirdPart = instructionParts[2];
+            }
+
             String[] newAr = { firstPart, secondPart, thirdPart, fourthPart };
             parsedMultipleArray[counter - 1] = newAr;
         }
@@ -225,4 +263,7 @@ public class Parser {
         refinedParsedArray = parsedMultipleArray;
 
     }
+
 }
+
+
