@@ -81,33 +81,29 @@ public class Parser {
         if (firstPart.equals("hexagon")) {
             System.out.println("hexagon");
 
-
+        }
+        if (firstPart.equals("oval")) {
+            System.out.println("oval");
+            thirdPart = instructionParts[2];
         }
 
         if (firstPart.equals("septagon")) {
             System.out.println("septagon");
-
-
         }
 
 
         if (firstPart.equals("octagon")) {
             System.out.println("octagon");
 
-
         }
 
 
         if (firstPart.equals("nonagon")) {
             System.out.println("nonagon");
-
-
         }
 
         if (firstPart.equals("decagon")) {
             System.out.println("decagon");
-
-
         }
 
         if (firstPart.equals("square")) {

@@ -184,6 +184,12 @@ public class DrawCanvas extends JPanel {
                     graphicsDrawer.fillPolygon(x, y, 6);
                 }
 
+                //oval
+
+                if (each[0].equals("oval")) {
+                    graphicsDrawer.fillOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[2]));
+                }
+
             }
 
             if (!fillOn) {
@@ -254,6 +260,10 @@ public class DrawCanvas extends JPanel {
                 }
 
                 //oval
+
+                if (each[0].equals("oval")) {
+                    graphicsDrawer.drawOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[2]));
+                }
 
             }
         }
