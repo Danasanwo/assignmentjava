@@ -15,6 +15,14 @@ import javax.swing.JPanel;
 
 public class DrawCanvas extends JPanel {
 
+/**
+
+* <p> Thses are some of the fields created that are used by most of the shapes and give more context to how the drawings happen. </p>
+* 
+* @author Damilola Anasanwo
+* 
+*/
+
     public Integer posX = 0;
     public Integer posY = 0;
     public String shapeColour = "#000000";
