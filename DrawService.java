@@ -1,3 +1,10 @@
+/**
+* <h2> This is the documentation of the Draw Service Class" </h2>
+* <p> This class contains the purposed draw service class used to draw all the shapes.
+* </p>
+* @author Damilola Anasanwo
+* 
+*/
 public class DrawService {
     Shape shape = new Shape();
 
