@@ -214,6 +214,11 @@ public class Parser {
                 }
             }
 
+            if (firstPart.equals("if")) {
+                thirdPart = instructionParts[2];
+                fourthPart = instructionParts[3];
+            }
+
             if (firstPart.equals("rectangle")) {
                 thirdPart = instructionParts[2];
             }
