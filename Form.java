@@ -13,8 +13,22 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+
+/**
+* <h2> This is the documentation of the Form Class" </h2>
+* <p> This class contains the Form where all the paint works done by the language is inputed. It is a 800 x 500 piece of canvas
+* and it is created using Java swing AWT. It comprises of a text area for short line codes and text field for multiple line codes.
+* It also contains two buttons "run" and "save" to run the codes and save it in a txt file. </p>
+* 
+* @author Damilola Anasanwo
+* 
+*/
+
 public class Form extends JFrame implements ActionListener {
 
+/**
+ * SingleCommand and MultipleCommand field.
+ */
     JTextField singleCommand;
     JTextArea multipleCommand;
     JTextArea errorCommand;
@@ -23,6 +37,14 @@ public class Form extends JFrame implements ActionListener {
     JButton resetButton;
     JButton saveButton;
     DrawCanvas canva;
+
+
+/**
+ * <p> The createFile Method basically creates a TXT file and saves the content of the input boxes in it
+ * </p>
+ * @param content the content to be saved in the file
+ * @since 1.0
+ */
 
     public void createFile(String content) {
 

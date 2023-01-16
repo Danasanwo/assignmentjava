@@ -1,9 +1,17 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-
 import javax.swing.JPanel;
+
+/**
+* <h2> This is the documentation of the Draw Canvas Class" </h2>
+* <p> This class contains the Canvas where all the paint works done by the language is Drawn. It is a 500 x 500 piece of canvas
+* and it is created using Java swing AWT. It comprises of a CANVAS.
+* 
+* @author Damilola Anasanwo
+* 
+*/
+
 
 public class DrawCanvas extends JPanel {
 
@@ -106,6 +114,11 @@ public class DrawCanvas extends JPanel {
 
     }
 
+ /**
+ * <p> The PAINT method is where the hardcore graphics work is initiated. It can fill, draw and delete several shapes in differemnt colors.
+ * </p>
+ * @since 1.0
+ */
     public void paint(Graphics g) {
 
         Graphics2D graphicsDrawer = (Graphics2D) g;
