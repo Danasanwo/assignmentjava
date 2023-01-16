@@ -149,8 +149,7 @@ public class DrawCanvas extends JPanel {
                         
                         secondPart = myVariables.get(pos + 1);
                     }
-
-        
+       
                     // if 
                     if (firstPart.equals("if")) {
                         // reconstruct 
@@ -185,6 +184,16 @@ public class DrawCanvas extends JPanel {
 
                     }
 
+                    // for 
+                    if (firstPart.equals("while")) {
+                        if (myVariables.contains(each[1])) {
+
+                            int pos = myVariables.indexOf(each[1]);
+                            int forCarrier = 0;
+                            String sign = thirdPart;
+                            forCarrier = Integer.parseInt(myVariables.get(pos + 1));
+                         }
+                    }
                     // SYNTAX 
 
                     if (getIsIfTrue()) {
