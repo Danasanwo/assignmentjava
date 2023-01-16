@@ -112,45 +112,56 @@ public class DrawCanvas extends JPanel {
             String fourthPart = "";
 
             for (var each : getGraphicsInstruction()) {
+       
                 counter = counter + 1;
 
-            
-    
                 if (Arrays.stream(each).anyMatch("incorrect"::equals)) {
                     graphicsDrawer.drawString( each[0] + " on line " + counter + " is not a correct syntax", 100, 200);
                     return;
     
                 } else {
 
+                
                 if (each[1].equals("=")){
                     setVar(each[0]);
                     setVar(each[2]);
 
-                    System.out.println(getMyVariables());
                 }
+
+                firstPart = each[0];
+                secondPart = each[1];
+                thirdPart = each[2];
+                fourthPart = each[3];
+
+                if (myVariables.contains(secondPart)) {
+                    int pos = myVariables.indexOf(secondPart);
+                    
+                    secondPart = myVariables.get(pos + 1);
+                }
+
     
                 // move to
-                if (each[0].equals("moveto")) {
-                    setPosX(Integer.parseInt(each[1]));
-                    setPosY(Integer.parseInt(each[2]));
+                if (firstPart.equals("moveto")) {
+                    setPosX(Integer.parseInt(secondPart));
+                    setPosY(Integer.parseInt(thirdPart));
                 }
     
                 // draw to
     
-                if (each[0].equals("drawto")) {
-                    graphicsDrawer.drawLine(getPosX(), getPosY(), Integer.parseInt(each[1]),
-                            Integer.parseInt(each[2]));
-                    setPosX(Integer.parseInt(each[1]));
-                    setPosY(Integer.parseInt(each[2]));
+                if (firstPart.equals("drawto")) {
+                    graphicsDrawer.drawLine(getPosX(), getPosY(), Integer.parseInt(secondPart),
+                            Integer.parseInt(thirdPart));
+                    setPosX(Integer.parseInt(secondPart));
+                    setPosY(Integer.parseInt(thirdPart));
                 }
     
                 // cursor
-                if (each[0].equals("")) {
+                if (firstPart.equals("")) {
                     graphicsDrawer.fillRect(0, 0, 2, 2);
                 }
 
                 // reset 
-                if (each[0].equals("reset")) {
+                if (firstPart.equals("reset")) {
                     setPosX(0);
                     setPosY(0);
                     graphicsDrawer.drawOval(0, 0, 25, 25);
@@ -158,7 +169,7 @@ public class DrawCanvas extends JPanel {
                 }
                 
                 // clear 
-                if (each[0].equals("clear")) {
+                if (firstPart.equals("clear")) {
                     setPosX(getPosX());
                     setPosY(getPosY());
                     graphicsDrawer.drawOval(0, 0, 0, 0);
@@ -167,46 +178,46 @@ public class DrawCanvas extends JPanel {
     
                 // pen colour
     
-                if (each[0].equals("pen")) {
-                    setColour(each[1]);
+                if (firstPart.equals("pen")) {
+                    setColour(secondPart);
                 }
     
                 // fill shape
-                if (each[0].equals("fill")) {
-                    setFillOn(each[1]);
+                if (firstPart.equals("fill")) {
+                    setFillOn(secondPart);
                 }
     
                 if (fillOn) {
     
                     // rectangle
-                    if (each[0].equals("rectangle")) {
-                        graphicsDrawer.fillRect(getPosX(), getPosY(), Integer.parseInt(each[1]),
-                                Integer.parseInt(each[2]));
+                    if (firstPart.equals("rectangle")) {
+                        graphicsDrawer.fillRect(getPosX(), getPosY(), Integer.parseInt(secondPart),
+                                Integer.parseInt(thirdPart));
     
                     }
     
                     // circle
-                    if (each[0].equals("circle")) {
+                    if (firstPart.equals("circle")) {
     
-                        graphicsDrawer.fillOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+                        graphicsDrawer.fillOval(getPosX(), getPosY(), Integer.parseInt(secondPart), Integer.parseInt(secondPart));
     
                     }
     
                     // square
     
-                    if (each[0].equals("square")) {
-                        graphicsDrawer.fillRect(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+                    if (firstPart.equals("square")) {
+                        graphicsDrawer.fillRect(getPosX(), getPosY(), Integer.parseInt(secondPart), Integer.parseInt(secondPart));
                     }
     
                     // Triangle
     
-                    if (each[0].equals("triangle")) {
+                    if (firstPart.equals("triangle")) {
     
                         // x coordinates of vertices
-                        int x[] = { (getPosX() +  (Integer.parseInt(each[1])/ 2)), getPosX() , getPosX() + Integer.parseInt(each[1]) };
+                        int x[] = { (getPosX() +  (Integer.parseInt(secondPart)/ 2)), getPosX() , getPosX() + Integer.parseInt(secondPart) };
         
                         // y coordinates of vertices
-                        int y[] = { getPosY(), (getPosY() + Integer.parseInt(each[2])), (getPosY() + Integer.parseInt(each[2]))};
+                        int y[] = { getPosY(), (getPosY() + Integer.parseInt(thirdPart)), (getPosY() + Integer.parseInt(thirdPart))};
     
                         // draw the polygon using drawPolygon function
                         graphicsDrawer.fillPolygon(x, y, 3);
@@ -214,34 +225,34 @@ public class DrawCanvas extends JPanel {
                     }
     
                     // pentagon
-                    if (each[0].equals("pentagon")) {
+                    if (firstPart.equals("pentagon")) {
     
                         // x coordinates of vertices
-                        int x[] = { (getPosX() +  (Integer.parseInt(each[1]) * 309 / 1000)), (getPosX() + (Integer.parseInt(each[1]) * 309 / 1000) + (Integer.parseInt(each[1]))) ,
-                            (getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))), ((getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))) / 2),
+                        int x[] = { (getPosX() +  (Integer.parseInt(secondPart) * 309 / 1000)), (getPosX() + (Integer.parseInt(secondPart) * 309 / 1000) + (Integer.parseInt(secondPart))) ,
+                            (getPosX() +  (Integer.parseInt(secondPart) * 2 * 309 / 1000) + (Integer.parseInt(secondPart))), ((getPosX() +  (Integer.parseInt(secondPart) * 2 * 309 / 1000) + (Integer.parseInt(secondPart))) / 2),
                             getPosX()};
                 
                         // y coordinates of vertices
-                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 951/1000)),
-                            (getPosY() + (Integer.parseInt(each[1]) * 951/1000) + (Integer.parseInt(each[1]) * 588/1000)), 
-                            (getPosY() + (Integer.parseInt(each[1]) * 951/1000))};
+                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(secondPart) * 951/1000)),
+                            (getPosY() + (Integer.parseInt(secondPart) * 951/1000) + (Integer.parseInt(secondPart) * 588/1000)), 
+                            (getPosY() + (Integer.parseInt(secondPart) * 951/1000))};
     
                         // draw the polygon using drawPolygon function
                         graphicsDrawer.fillPolygon(x, y, 5);
                     }
     
                     // hexagon
-                    if (each[0].equals("hexagon")) {
+                    if (firstPart.equals("hexagon")) {
     
                         // x coordinates of vertices
-                        int x[] = { (getPosX() +  (Integer.parseInt(each[1]) / 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))) ,
-                                (getPosX() +  (Integer.parseInt(each[1]) * 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))),
-                                (getPosX() +  (Integer.parseInt(each[1]) / 2)), getPosX()};
+                        int x[] = { (getPosX() +  (Integer.parseInt(secondPart) / 2)), (getPosX() + (Integer.parseInt(secondPart)/ 2) + (Integer.parseInt(secondPart))) ,
+                                (getPosX() +  (Integer.parseInt(secondPart) * 2)), (getPosX() + (Integer.parseInt(secondPart)/ 2) + (Integer.parseInt(secondPart))),
+                                (getPosX() +  (Integer.parseInt(secondPart) / 2)), getPosX()};
                 
                         // y coordinates of vertices
-                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 866/1000)),
-                            (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)), (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)),
-                            (getPosY() + (Integer.parseInt(each[1]) * 866/1000))};
+                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(secondPart) * 866/1000)),
+                            (getPosY() + (Integer.parseInt(secondPart) * 2 * 866/1000)), (getPosY() + (Integer.parseInt(secondPart) * 2 * 866/1000)),
+                            (getPosY() + (Integer.parseInt(secondPart) * 866/1000))};
     
                         // draw the polygon using drawPolygon function
                         graphicsDrawer.fillPolygon(x, y, 6);
@@ -249,8 +260,8 @@ public class DrawCanvas extends JPanel {
     
                     //oval
     
-                    if (each[0].equals("oval")) {
-                        graphicsDrawer.fillOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[2]));
+                    if (firstPart.equals("oval")) {
+                        graphicsDrawer.fillOval(getPosX(), getPosY(), Integer.parseInt(secondPart), Integer.parseInt(thirdPart));
                     }
     
                 }
@@ -258,65 +269,65 @@ public class DrawCanvas extends JPanel {
                 if (!fillOn) {
     
                     // rectangle
-                    if (each[0].equals("rectangle")) {
-                        graphicsDrawer.drawRect(getPosX(), getPosY(), Integer.parseInt(each[1]),
-                                Integer.parseInt(each[2]));
+                    if (firstPart.equals("rectangle")) {
+                        graphicsDrawer.drawRect(getPosX(), getPosY(), Integer.parseInt(secondPart),
+                                Integer.parseInt(thirdPart));
                         ;
                     }
     
                     // circle
-                    if (each[0].equals("circle")) {
-                        graphicsDrawer.drawOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+                    if (firstPart.equals("circle")) {
+                        graphicsDrawer.drawOval(getPosX(), getPosY(), Integer.parseInt(secondPart), Integer.parseInt(secondPart));
     
                     }
     
                     // square
-                    if (each[0].equals("square")) {
-                        graphicsDrawer.drawRect(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[1]));
+                    if (firstPart.equals("square")) {
+                        graphicsDrawer.drawRect(getPosX(), getPosY(), Integer.parseInt(secondPart), Integer.parseInt(secondPart));
                     }
     
                     // Triangle
-                    if (each[0].equals("triangle")) {
+                    if (firstPart.equals("triangle")) {
     
                         // x coordinates of vertices
-                        int x[] = { (getPosX() +  (Integer.parseInt(each[1])/ 2)), getPosX() , getPosX() + Integer.parseInt(each[1]) };
+                        int x[] = { (getPosX() +  (Integer.parseInt(secondPart)/ 2)), getPosX() , getPosX() + Integer.parseInt(secondPart) };
                 
                         // y coordinates of vertices
-                        int y[] = { getPosY(), (getPosY() + Integer.parseInt(each[2])), (getPosY() + Integer.parseInt(each[2]))};
+                        int y[] = { getPosY(), (getPosY() + Integer.parseInt(thirdPart)), (getPosY() + Integer.parseInt(thirdPart))};
     
                         // draw the polygon using drawPolygon function
                         graphicsDrawer.drawPolygon(x, y, 3);
                     }
     
                     // pentagon
-                    if (each[0].equals("pentagon")) {
+                    if (firstPart.equals("pentagon")) {
     
                         // x coordinates of vertices
-                        int x[] = { (getPosX() +  (Integer.parseInt(each[1]) * 309 / 1000)), (getPosX() + (Integer.parseInt(each[1]) * 309 / 1000) + (Integer.parseInt(each[1]))) ,
-                             (getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))), ((getPosX() +  (Integer.parseInt(each[1]) * 2 * 309 / 1000) + (Integer.parseInt(each[1]))) / 2),
+                        int x[] = { (getPosX() +  (Integer.parseInt(secondPart) * 309 / 1000)), (getPosX() + (Integer.parseInt(secondPart) * 309 / 1000) + (Integer.parseInt(secondPart))) ,
+                             (getPosX() +  (Integer.parseInt(secondPart) * 2 * 309 / 1000) + (Integer.parseInt(secondPart))), ((getPosX() +  (Integer.parseInt(secondPart) * 2 * 309 / 1000) + (Integer.parseInt(secondPart))) / 2),
                              getPosX()};
                 
                         // y coordinates of vertices
-                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 951/1000)),
-                            (getPosY() + (Integer.parseInt(each[1]) * 951/1000) + (Integer.parseInt(each[1]) * 588/1000)), 
-                            (getPosY() + (Integer.parseInt(each[1]) * 951/1000))};
+                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(secondPart) * 951/1000)),
+                            (getPosY() + (Integer.parseInt(secondPart) * 951/1000) + (Integer.parseInt(secondPart) * 588/1000)), 
+                            (getPosY() + (Integer.parseInt(secondPart) * 951/1000))};
     
                         // draw the polygon using drawPolygon function
                         graphicsDrawer.drawPolygon(x, y, 5);
                     }
     
                     // hexagon
-                    if (each[0].equals("hexagon")) {
+                    if (firstPart.equals("hexagon")) {
     
                         // x coordinates of vertices
-                        int x[] = { (getPosX() +  (Integer.parseInt(each[1]) / 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))) ,
-                                (getPosX() +  (Integer.parseInt(each[1]) * 2)), (getPosX() + (Integer.parseInt(each[1])/ 2) + (Integer.parseInt(each[1]))),
-                                (getPosX() +  (Integer.parseInt(each[1]) / 2)), getPosX()};
+                        int x[] = { (getPosX() +  (Integer.parseInt(secondPart) / 2)), (getPosX() + (Integer.parseInt(secondPart)/ 2) + (Integer.parseInt(secondPart))) ,
+                                (getPosX() +  (Integer.parseInt(secondPart) * 2)), (getPosX() + (Integer.parseInt(secondPart)/ 2) + (Integer.parseInt(secondPart))),
+                                (getPosX() +  (Integer.parseInt(secondPart) / 2)), getPosX()};
                 
                         // y coordinates of vertices
-                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(each[1]) * 866/1000)),
-                            (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)), (getPosY() + (Integer.parseInt(each[1]) * 2 * 866/1000)),
-                            (getPosY() + (Integer.parseInt(each[1]) * 866/1000))};
+                        int y[] = { getPosY(), getPosY(), (getPosY() + (Integer.parseInt(secondPart) * 866/1000)),
+                            (getPosY() + (Integer.parseInt(secondPart) * 2 * 866/1000)), (getPosY() + (Integer.parseInt(secondPart) * 2 * 866/1000)),
+                            (getPosY() + (Integer.parseInt(secondPart) * 866/1000))};
     
                         // draw the polygon using drawPolygon function
                         graphicsDrawer.drawPolygon(x, y, 6);
@@ -324,8 +335,8 @@ public class DrawCanvas extends JPanel {
     
                     //oval
     
-                    if (each[0].equals("oval")) {
-                        graphicsDrawer.drawOval(getPosX(), getPosY(), Integer.parseInt(each[1]), Integer.parseInt(each[2]));
+                    if (firstPart.equals("oval")) {
+                        graphicsDrawer.drawOval(getPosX(), getPosY(), Integer.parseInt(secondPart), Integer.parseInt(thirdPart));
                     }
     
                  }

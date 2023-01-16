@@ -206,7 +206,7 @@ public class Parser {
                 // System.out.println("proceed");
             } else {
                 if (secondPart.equals("=")) {
-                    System.out.println(secondPart);
+                    // System.out.println(secondPart);
                     thirdPart = instructionParts[2];
                 } else {
                     System.out.println("incorrect");
