@@ -9,7 +9,7 @@ public class Parser {
     // list of possible instructions
     public String[] instructionSet = { "clear", "moveto", "reset", "clear", "pen", "line", "draw", "circle", "triangle",
             "rectangle", "fill", "square", "drawto", "pentagon", "hexagon", "septagon", "octagon", "nonagon", "decagon", 
-        "oval" };
+        "oval" , "while", "for", "if"};
 
     // set instruction
     public void setInstruction(String command) {
