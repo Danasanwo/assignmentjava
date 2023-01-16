@@ -1,10 +1,22 @@
 
 import java.util.Arrays;
 
+/**
+* <h2> This is the documentation of the Parser Class" </h2>
+* <p> This class contains the parsing algorithms that transforms basic inputs into syntax for the visual language </p>
+* 
+* @author Damilola Anasanwo
+*/
+
 
 public class Parser {
     public String instruction;
     public String[] multipleInstruction;
+
+/** 
+* <p> The instruction set contains a list of  complete intructions native to the new language. It also serves as a good filter for wrong codes</p>
+* 
+*/
 
     // list of possible instructions
     public String[] instructionSet = { "clear", "moveto", "reset", "clear", "pen", "line", "draw", "circle", "triangle",
